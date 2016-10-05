@@ -39,8 +39,10 @@ Bounce the server and locator
 * `$ start server --name=server1 --locators=localhost[10334]`
 
 Create AsyncEventQueue in Gemfire
-* `create async-event-queue --id=myQueueId --listener=listener.gemfire.FileSavedAsyncEventListener --listener-param=path#/where/I/want/to/save/files/`
+* `$ create async-event-queue --id=myQueueId --listener=listener.gemfire.FileSavedAsyncEventListener --listener-param=path#/where/I/want/to/save/files/`
+* `$ create region --name=myregion --type=PARTITION --async-event-queue-id=myQueueId`
 
 
-
-#### Building the Spring Boot Client app
+#### Building and starting the Spring Boot Client app
+* `$ mvn clean package -DskipTests`
+* `$ SPRING_GEMFIRE_LOCATORS=myhost[12345] MYAPP_GEMFIRE_REGION_NAME=myregion MYAPP_GEMFIRE_REGION_ASYNCEVENTQUEUEID=myQueueId java -jar target/gemfire-0.0.1-SNAPSHOT.jar`
